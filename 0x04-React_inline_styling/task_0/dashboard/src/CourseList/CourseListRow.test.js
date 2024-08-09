@@ -1,26 +1,28 @@
 import React from "react";
-import CourseListRow from "./CourseListRow";
 import { shallow } from "enzyme";
+import CourseListRow from "./CourseListRow";
 
-describe("Course List Row component test", () => {
-  it("should render without crashing", () => {
-    const wrapper = shallow(<CourseListRow textFirstCell="test" />);
-
-    expect(wrapper.exists()).toBe(true);
+describe("CourseListRow component", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Course" />);
   });
-
-  it("should render one cell with colspan = 2 when textSecondCell null", () => {
-    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="test" textSecondCell={null} />);
-
-    expect(wrapper.find("tr").children()).toHaveLength(1);
-    expect(wrapper.find("tr").childAt(0).html()).toEqual('<th style="background-color:#deb5b545" colSpan="2">test</th>');
+  it("Renders one cell with colspan = 2 when textSecondCell does not exist", () => {
+    expect(wrapper.find("th")).toHaveLength(1);
+    expect(wrapper.find("th").prop("colSpan")).toBe(2);
+    wrapper = shallow(
+      <CourseListRow
+        isHeader={true}
+        textFirstCell="Course"
+        textSecondCell="Credit"
+      />
+    );
+    expect(wrapper.find("th")).toHaveLength(2);
   });
-
-  it("should render two cells when textSecondCell not null", () => {
-    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="test" textSecondCell="test" />);
-
-    expect(wrapper.find("tr").children()).toHaveLength(2);
-    expect(wrapper.find("tr").childAt(0).html()).toEqual("<td>test</td>");
-    expect(wrapper.find("tr").childAt(1).html()).toEqual("<td>test</td>");
+  it("Renders two td cells when isHeader is false", () => {
+    wrapper = shallow(
+      <CourseListRow isHeader={false} textFirstCell="Math" textSecondCell="3" />
+    );
+    expect(wrapper.find("td")).toHaveLength(2);
   });
 });

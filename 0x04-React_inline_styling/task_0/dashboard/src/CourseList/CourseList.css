@@ -1,25 +1,24 @@
-table {
-  margin-top: 2em;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 1.2rem;
-  margin-bottom: 15em;
+#CourseList {
+  width: 95%;
+  border-collapse: collapse;
+  border: 0.025rem solid #ddd;
 }
 
 th {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.15rem solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
-th,
 td {
-  width: 80%;
+  padding: 8px;
+  text-align: left;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
+th[colspan="2"] {
+  text-align: center;
 }
 
-tr:nth-child(2) {
+#CourseList td {
   text-align: left;
 }
